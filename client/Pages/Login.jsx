@@ -39,7 +39,7 @@ class Login extends React.Component {
         </div>
         <div className='Register'>
           <form className='RegisterForm'>
-            <hr>Register</hr>
+            <h4>Register</h4>
             <label>Username:  </label>
             <input 
               id='newUsername'
