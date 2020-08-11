@@ -2,17 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from './Pages/Login.jsx';
 import Profile from './Pages/Profile.jsx';
-import Feed from './Pages/Feed.jsx';
+import Feed from './Pages/Feed/Feed.jsx';
+import Navbar from './Components/Navbar.jsx';
+import { Route, Switch, withRouter, Link } from 'react-router-dom';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello world</h1>
+        <Navbar />
+        {/* path = '/' - main paige 
+        {/* '/signin' */}
+        {/* <Login /> */}
+        {/* '/profile' */}
+        {/* <Profile /> */}
+        {/* '/feed' */}
+        {/* <Feed />*/}
+        <h1>Hell World</h1>
+        <Switch>
+          <Route path='/feed' component={Feed} />
+        </Switch>
       </div>
     );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));
-export default App;
+export default withRouter(App);
