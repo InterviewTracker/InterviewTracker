@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: './client/index.js',
   target: 'node',
   output: {
@@ -12,9 +13,7 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000',
     },
-    port: 8080,
   },
-  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
