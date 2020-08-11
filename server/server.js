@@ -25,4 +25,20 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Unknown error',
+    status: 400,
+    message: {
+      err: 'An error occurred'
+    },
+  };
+
+  const errorObj = Object.assign({}, defaultErr);
+  errorObj.message = err.message;
+  errorObj.log = err.log;
+  const errorStatus = err.status || 404;
+  return res.status(errorStatus).json(errorObj.message);
+})
+
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

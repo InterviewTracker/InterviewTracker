@@ -12,6 +12,7 @@ class App extends React.Component {
     super();
     this.helper = this.helper.bind(this);
   }
+<<<<<<< HEAD
   helper() {
     console.log('helper');
     fetch('/user/addUser', {
@@ -27,6 +28,18 @@ class App extends React.Component {
         github: 'whatever',
       }),
     }).then((data) => {
+=======
+  helper(){
+    console.log('helper')
+    fetch('/content/editContent', {
+      method:'POST',
+      headers:{
+        "Content-type":"application/json; charset=UTF-8"
+    },
+    body: JSON.stringify({company: 'spaceX', full_stack: 'true'}),
+    })
+    .then((data) => {
+>>>>>>> e183e4da9f2dc84e25a6be44f02faf6c99cf83f8
       console.log(data);
     });
   }
