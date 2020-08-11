@@ -9,9 +9,9 @@ module.exports = {
     path: path.resolve(__dirname, './build'),
   },
   devServer: {
-    publicPath: '/build/', // webpack dev server looks here to find bundle.js
+    publicPath: 'http://localhost:8080/build/', // webpack dev server looks here to find bundle.js
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/': 'http://localhost:3000',
     },
   },
   module: {
