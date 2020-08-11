@@ -1,8 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Interview from './Interview.jsx';
+import Search from './Search.jsx';
 
 function Feed() {
-  const [interviews, setInterviews] = useState([]);
+  const [interviewsFromDb, setInterviews] = useState([]);
   // useEffect(() => {
   //   fetch('localhost:3000/feed')
   //     .then((data) => {
@@ -14,14 +15,24 @@ function Feed() {
   //       }
   //     });
   // });
+  const data = [
+    { id: 1, company: 'google' },
+    { id: 2, company: 'amazon' },
+    { id: 3, company: 'kmart' },
+  ];
   useEffect(() => {
-    setInterviews(
-      interviews.concat(<Interview interviews={{ company: 'google' }} />)
-    );
-  });
+    setInterviews([...interviewsFromDb, ...data]);
+  }, []);
+  const interviews = [];
+  let i = 0;
+  while (i < interviewsFromDb.length) {
+    interviews.push(<Interview interviews={interviewsFromDb[i]} />);
+    i++;
+  }
   return (
     <div>
-      <p>{interviews}</p>
+      <Search />
+      {interviews}
     </div>
   );
 }
