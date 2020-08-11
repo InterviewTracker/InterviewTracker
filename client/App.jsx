@@ -11,13 +11,12 @@ class App extends React.Component {
   }
   helper(){
     console.log('helper')
-    fetch('/user/addUser', {
+    fetch('/content/editContent', {
       method:'POST',
       headers:{
         "Content-type":"application/json; charset=UTF-8"
     },
-    body: JSON.stringify({name: 'hamoud', userName: 'whatever', email: 'whatever', password: 'whatever', github:'whatever'}),
-
+    body: JSON.stringify({company: 'spaceX', full_stack: 'true'}),
     })
     .then((data) => {
       console.log(data);
