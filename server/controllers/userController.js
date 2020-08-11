@@ -26,8 +26,6 @@ userController.addUser = (req, res, next) => {
     db.query(queryString)
     .then((data) => {
         res.body = data.rows
-        
-        // res.redirect('/user/getFeed');
         next();
     })
     .catch((err) => {
@@ -37,8 +35,8 @@ userController.addUser = (req, res, next) => {
 
 userController.getUser = (req, res, next) => {
     const cookie = req.cookie;
-    const queryString = `SELECT * FROM user_info WHERE id = $1`;
-    db.query(queryString, [cookie])
+    const queryString = `SELECT * FROM user_info WHERE id = ${cookie}`;
+    db.query(queryString)
     .then((data) => {
         res.body = data.rows;
         next();
