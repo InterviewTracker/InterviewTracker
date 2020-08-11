@@ -1,68 +1,81 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import '../styles/styles.scss'
 
 
-class Profile extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          username: '',
-          company: '',
-          title: '',
-          stack: '',
-          date: '',
-          status: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function Profile () {
+  const [company, setCompany] = useState('');
+  const [title, setTitle] = useState('');
+  const [stack, setStack] = useState('');
+  const [date, setDate] = useState('');
+  const [status, setStatus] = useState('');
+  const [question, setQuestion] = useState('');
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  const onSubmit = (data) => {
+    console.log(data);
   }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
     return (
-      <div id="Interview">
+      <div id="InterviewDiv">
 
       <h2> Interview Experience </h2>
-      <form onSubmit={this.handleSubmit}>
+      <form className='InterviewForm' onSubmit={onSubmit}>
 
         {/* Company Name  */}
         <label>
           Company Name: 
-          <input type="text" value={this.state.company} onChange={this.handleChange} />
+          <input 
+          type='text'
+          name='company'
+          placeholder='Company'
+          onChange={(e) => setCompany(e.target.value)} 
+          />
         </label>
-        <input type="submit" value="Submit" />
 
         {/* Title  */}
         <br/>
+        <br/>
         <label>
           Position Title: 
-          <input type="text" value={this.state.title} onChange={this.handleChange} />
+          <input 
+          type="text" 
+          name='title'
+          placeholder='Title'
+          onChange={(e) => setTitle(e.target.value)} 
+          />
         </label>
-        <input type="submit" value="Submit" />
+
+        {/* Date  */}
+        <br/>
+        <br/>
+        <label>
+          Date Submitted: 
+          <input 
+          type="text" 
+          name='date'
+          placeholder='Date'
+          onChange={(e) => setDate(e.target.value)} 
+          />
+        </label>
 
         {/* Status  */}
         <br/>
+        <br/>
         <label>
-          Status: 
-          <input type="text" value={this.state.title} onChange={this.handleChange} />
+          Status:
+            <input type="radio" checked={status === 'Passes'} value="Passes" onChange={() => setStatus('Passes')} />
+            Passed
         </label>
-        <input type="submit" value="Submit" />
+        <label>
+            <input type="radio" checked={status === 'Failed'} value="Failed" onChange={() => setStatus('Failed')} />
+            Failed
+        </label>
 
       {/* Drop Down for Tech Stack */}
       <br/>
+      <br/>
         <label>
           Your Tech Stack:
-          {/* <select value='Select' onChange={this.handleChange}> */}
-          <select>
+          <select onChange={(e) => setStack(e.target.value)}>
+          {/* {<select> */}
             <option value=""> Select </option>
             <option value="frontend">Front-End</option>
             <option value="backend">Back-End</option>
@@ -70,20 +83,65 @@ class Profile extends React.Component {
             <option value="all">All</option>
           </select>
         </label>
-        <input type="submit" value="Submit" />
 
-        {/* Questions  */}
+        {/* Question1  */}
+        <br/>
         <br/>
         <label>
-          Questions: 
-          <input type="text" value={this.state.questions} onChange={this.handleChange} />
+          Question 1: 
+          <input 
+          type="text" 
+          placeholder='Question'
+          onChange={(e) => setQuestion(e.target.value)} 
+          />
         </label>
-        <input type="submit" value="Submit" />
+
+         {/* Question2  */}
+         <br/>
+        <br/>
+        <label>
+          Question 2: 
+          <input 
+          type="text" 
+          placeholder='Question'
+          onChange={(e) => setQuestion(e.target.value)} 
+          />
+        </label>
+
+         {/* Question3  */}
+         <br/>
+        <br/>
+        <label>
+          Question 3: 
+          <input 
+          type="text" 
+          placeholder='Question'
+          onChange={(e) => setQuestion(e.target.value)} 
+          />
+        </label>
+
+        {/* Check box  */}
+        <br/>
+        <br/>
+        <label>
+          More Questions? 
+          <input 
+          type="checkbox" 
+          name='More Questions'
+          />
+        </label>
+
+        <br/>
+        <br/>
+        <br/>
+
+        <button type="submit" className="btn submitInterview">
+              Submit
+        </button>
 
       </form>
       </div>
-    );
-  }
+  );
 }
 
 export default Profile;

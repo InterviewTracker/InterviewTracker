@@ -28,12 +28,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-        <h1>Hello world</h1>
-=======
         <h1>Hello world5</h1>
         <button onClick={this.helper}>hello</button>
->>>>>>> e6bc86387a09372f5dfa73d9ad877ca7ae8812d9
         <Profile />
       </div>
     );
