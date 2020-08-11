@@ -11,7 +11,7 @@ function Login() {
   const [github, setGithub] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [checkNewPass, setCheckNewPass] = useState('')
-
+  console.log('PASSWORD: ', password)
   return(
     <div className='MainDiv'>
       <div className='Login'>
@@ -39,7 +39,7 @@ function Login() {
         </form>
       </div>
       <div className="OAuth">
-
+        <a href="https://github.com/login/oauth/authroize?client_id=c9608cb1875cd40998af">Sign in with GitHub</a>
       </div>
       <div className='Register'>
         <form className='RegisterForm'>
