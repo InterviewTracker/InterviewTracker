@@ -16,7 +16,7 @@ class App extends React.Component {
       headers:{
         "Content-type":"application/json; charset=UTF-8"
     },
-    body: JSON.stringify({postId: 2, topic: 'company_name', updatedContent: 'Google'}),
+    body: JSON.stringify({company: 'spaceX', full_stack: 'true'}),
     })
     .then((data) => {
       console.log(data);
