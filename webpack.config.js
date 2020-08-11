@@ -13,6 +13,7 @@ module.exports = {
       '/api': 'http://localhost:3000',
     },
     port: 8080,
+    hot:true,
   },
   mode: process.env.NODE_ENV,
   module: {
