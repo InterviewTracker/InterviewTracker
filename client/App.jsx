@@ -30,7 +30,7 @@ class App extends React.Component {
       <div>
         <h1>Hello world5</h1>
         <button onClick={this.helper}>hello</button>
-        <Profile />
+        <Login />
       </div>
     );
   }
