@@ -8,11 +8,21 @@ html{
   justify-content: center;
   font-family: sans-serif;
   font-weight: 300;
-  .Login {
-    border: solid black 2px;
-    }
+  .Login,
   .Register {
     border: solid black 2px;
+    padding: 1em;
+    width: 20%;
+    -webkit-box-shadow: 5px -2px 5px 0px rgba(0,0,0,0.56); 
+    box-shadow: 5px -2px 5px 0px rgba(0,0,0,0.56);
     }
+  }
+  .input-group{
+    display: flex;
+    flex-direction: column;
+    line-height: 2em;
+  }
+  .loginButton{
+    margin-top: 1em;
   }
 }

@@ -18,82 +18,88 @@ function Login() {
       <div className="Login">
         <form className="LoginForm">
           <h4>Login</h4>
-          <label>Username: </label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br />
-          <label>Password: </label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button type="submit" id="loginButton">
+          <div className="input-group">
+            <label>Username: </label>
+            <input
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Password: </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="loginButton">
             Login
           </button>
+          <div className='OAuth'>
+            <a href="https://github.com/login/oauth/authorize?client_id=c9608cb1875cd40998af&scope=read:user&redirect_uri=http://localhost:8080/github/callback">
+              Sign in with GitHub</a>
+          </div>
         </form>
-      </div>
-      <div className="OAuth">
-        <a href="https://github.com/login/oauth/authorize?client_id=c9608cb1875cd40998af&scope=read:user&redirect_uri=http://localhost:8080/github/callback">
-          Sign in with GitHub
-        </a>
       </div>
       <div className="Register">
         <form className="RegisterForm">
           <h4>Register</h4>
-          <label>Username: </label>
-          <input
-            id="newUsername"
-            type="text"
-            name="newUsername"
-            placeholder="Username"
-            onChange={(e) => setNewUsername(e.target.value)}
-          />
-          <br />
-          <label>Email: </label>
-          <input
-            id="email"
-            type="text"
-            name="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <label>GitHub Username (Optional): </label>
-          <input
-            id="githubName"
-            type="text"
-            name="githubName"
-            placeholder="GitHub Username"
-            onChange={(e) => setGithub(e.target.value)}
-          />
-          <br />
-          <label>Password: </label>
-          <input
-            id="newPassword"
-            type="password"
-            name="newPassword"
-            placeholder="Password"
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <br />
-          <label>Re-Enter Password: </label>
-          <input
-            id="reEnterPassword"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={(e) => setCheckNewPass(e.target.value)}
-          />
-          <br />
+          <div className="input-group">
+            <label>Username: </label>
+            <input
+              id="newUsername"
+              type="text"
+              name="newUsername"
+              placeholder="Username"
+              onChange={(e) => setNewUsername(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Email: </label>
+            <input
+              id="email"
+              type="text"
+              name="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>GitHub Username (Optional): </label>
+            <input
+              id="githubName"
+              type="text"
+              name="githubName"
+              placeholder="GitHub Username"
+              onChange={(e) => setGithub(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Password: </label>
+            <input
+              id="newPassword"
+              type="password"
+              name="newPassword"
+              placeholder="Password"
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Re-Enter Password: </label>
+            <input
+              id="reEnterPassword"
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setCheckNewPass(e.target.value)}
+            />
+          </div>
           <button type="submit" id="registerButton">
             Sign Up
           </button>

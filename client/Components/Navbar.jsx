@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Feed from '../Pages/Feed/Feed.jsx';
 import Profile from '../Pages/Profile.jsx';
 import Search from '../Pages/Feed/Search.jsx';
+import "../styles/styles.scss";
 
 function Navbar() {
   return (
