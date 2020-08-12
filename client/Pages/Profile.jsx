@@ -6,12 +6,30 @@ function Profile () {
   const [company, setCompany] = useState('');
   const [title, setTitle] = useState('');
   const [stack, setStack] = useState('');
-  const [date, setDate] = useState('');
   const [status, setStatus] = useState('');
-  const [question, setQuestion] = useState('');
+  console.log(company);
+  
+  const onSubmit = () => {
+    const list = document.getElementsByClassName('question');
+    const questions = [];
+    for(let question of list){
+      questions.push(question.value);
+    }
+    console.log(questions);
 
-  const onSubmit = (data) => {
-    console.log(data);
+    fetch('/content/addContent', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({company, title, stack, status, questions}),
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
     return (
       <div id="InterviewDiv">
@@ -28,6 +46,7 @@ function Profile () {
           placeholder='Company'
           onChange={(e) => setCompany(e.target.value)} 
           />
+          
         </label>
 
         {/* Title  */}
@@ -43,29 +62,20 @@ function Profile () {
           />
         </label>
 
-        {/* Date  */}
-        <br/>
-        <br/>
-        <label>
-          Date Submitted: 
-          <input 
-          type="text" 
-          name='date'
-          placeholder='Date'
-          onChange={(e) => setDate(e.target.value)} 
-          />
-        </label>
-
         {/* Status  */}
         <br/>
         <br/>
         <label>
           Status:
-            <input type="radio" checked={status === 'Passes'} value="Passes" onChange={() => setStatus('Passes')} />
+            <input type="radio" checked={status === 'Passed'} value="Passed" onChange={() => setStatus('Passed')} />
             Passed
         </label>
         <label>
             <input type="radio" checked={status === 'Failed'} value="Failed" onChange={() => setStatus('Failed')} />
+            Pending
+        </label>
+        <label>
+            <input type="radio" checked={status === 'Pending'} value="Pending" onChange={() => setStatus('Pending')} />
             Failed
         </label>
 
@@ -77,9 +87,9 @@ function Profile () {
           <select onChange={(e) => setStack(e.target.value)}>
           {/* {<select> */}
             <option value=""> Select </option>
-            <option value="frontend">Front-End</option>
-            <option value="backend">Back-End</option>
-            <option value="fullstack">Full-Stack</option>
+            <option value="frontend">FrontEnd</option>
+            <option value="backend">BackEnd</option>
+            <option value="fullstack">FullStack</option>
             <option value="all">All</option>
           </select>
         </label>
@@ -90,9 +100,9 @@ function Profile () {
         <label>
           Question 1: 
           <input 
+          className='question'
           type="text" 
           placeholder='Question'
-          onChange={(e) => setQuestion(e.target.value)} 
           />
         </label>
 
@@ -102,9 +112,9 @@ function Profile () {
         <label>
           Question 2: 
           <input 
+          className='question'
           type="text" 
           placeholder='Question'
-          onChange={(e) => setQuestion(e.target.value)} 
           />
         </label>
 
@@ -114,9 +124,9 @@ function Profile () {
         <label>
           Question 3: 
           <input 
+          className='question'
           type="text" 
           placeholder='Question'
-          onChange={(e) => setQuestion(e.target.value)} 
           />
         </label>
 
