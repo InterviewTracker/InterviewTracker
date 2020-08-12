@@ -7,7 +7,7 @@ function InterviewForm () {
   const [title, setTitle] = useState('');
   const [stack, setStack] = useState('');
   const [status, setStatus] = useState('');
-  console.log(company);
+  // console.log(company);
   
   const onSubmit = () => {
     const list = document.getElementsByClassName('question');
@@ -15,7 +15,7 @@ function InterviewForm () {
     for(let question of list){
       questions.push(question.value);
     }
-    console.log(questions);
+    // console.log(questions);
 
     fetch('/content/addContent', {
       method: 'POST',
@@ -25,7 +25,7 @@ function InterviewForm () {
       body: JSON.stringify({company, title, stack, status, questions}),
     })
     .then((data) => {
-      console.log(data);
+      // console.log(data);
     })
     .catch((err) => {
       console.log(err);

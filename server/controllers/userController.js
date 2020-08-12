@@ -33,7 +33,7 @@ userController.getFeed = (req, res, next) => {
       // for(let row of data.rows){
       //     JSON.parse(row.form);
       // };
-      console.log(data.rows)
+    //   console.log(data.rows)
       res.locals.data = data.rows;
       next();
     })
