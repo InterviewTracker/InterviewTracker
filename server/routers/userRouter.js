@@ -6,19 +6,20 @@ const router = express.Router();
 
 
 router.get('/login', userController.verifyUser, cookieController.setCookie, (req, res, next) => {
-    res.redirect('/user/userFeed'); // double check routing
+  res.redirect('/user/userFeed'); // double check routing
 });
 
 router.post('/addUser', cookieController.setCookie, userController.addUser, (req, res, next) => {
-    res.redirect('/user/userFeed');
+  res.redirect('/user/userFeed');
 });
 
 router.get('/userFeed', cookieController.verifyCookie, userController.getFeed, (req, res, next) => {
-    res.status(200).json(res.body); 
+  console.log('RES LOCALS**********', res.locals.data)
+  res.status(200).json({ data: res.locals.data });
 });
 
 router.get('/profile', cookieController.verifyCookie, userController.getUser, (req, res, next) => {
-    res.status(200).json(res.body)
+  res.status(200).json(res.body)
 });
 
 
