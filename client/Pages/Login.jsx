@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "../styles/styles.scss";
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -14,41 +14,46 @@ function Login() {
   const [loggedIn, setLoggedIn] = useState("false");
   console.log("PASSWORD: ", password);
 
-  function userLogin() {
-    console.log("Login button has been pushed");
-    fetch("http://localhost:8080/user/checkLogin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+  function userLogin(e) {
+    e.preventDefault()
+    console.log('Login button has been pushed')
+    fetch('http://localhost:8080/user/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
+        userName: username,
+        password: password
+      })
+    })
+    .then(res => res.json())
+    .then(res => props.setLogin(true))
   }
 
   function newUser(e) {
-    e.preventDefault();
-    if (newPassword.length < 6)
-      alert("Passwords must be at least 6 characters");
-    if (newPassword !== checkNewPass) alert("Passwords must match!");
-    console.log("Create User button has been pushed");
-    fetch("http://localhost:8080/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    e.preventDefault()
+    if (newPassword.length < 6) alert("Passwords must be at least 6 characters")
+    if (newPassword !== checkNewPass) alert("Passwords must match!")
+    console.log('Create User button has been pushed')
+    fetch ('http://localhost:8080/user/addUser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         newUsername: newUsername,
         email: email,
-        gitHub: gitHub,
+        gitHub: github,
         newPassword: newPassword,
-        checkNewPass: checkNewPass,
-      }),
-    });
+        checkNewPass: checkNewPass 
+      })
+    })
+    .then(res => res.json())
+    .then(res => console.log('RES RETURNED TO LOGIN: ', res))
+    .catch(res => alert('User already exists'))
   }
 
   return (
     <div className="MainDiv">
       <div className="Login">
-        <form className="LoginForm" onSubmit={(e) => userLogin()}>
+        <form className="LoginForm" onSubmit={(e) => userLogin(e)}>
           <h4>Login</h4>
           <div className="input-group">
             <label>Username: </label>
@@ -81,7 +86,7 @@ function Login() {
         </form>
       </div>
       <div className="Register">
-        <form className="RegisterForm" onSubmit={(e) => newUser()}>
+        <form className="RegisterForm" onSubmit={(e) => newUser(e)}>
           <h4>Register</h4>
           <div className="input-group">
             <label>Username: </label>
