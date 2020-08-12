@@ -15,33 +15,34 @@ function Login() {
   console.log("PASSWORD: ", password);
 
   function userLogin() {
-    console.log('Login button has been pushed')
-    fetch('http://localhost:8080/user/checkLogin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    console.log("Login button has been pushed");
+    fetch("http://localhost:8080/user/checkLogin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
-        password: password
-      })
-    })
+        password: password,
+      }),
+    });
   }
 
   function newUser(e) {
-    e.preventDefault()
-    if (newPassword.length < 6) alert("Passwords must be at least 6 characters")
-    if (newPassword !== checkNewPass) alert("Passwords must match!")
-    console.log('Create User button has been pushed')
-    fetch ('http://localhost:8080/user', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    e.preventDefault();
+    if (newPassword.length < 6)
+      alert("Passwords must be at least 6 characters");
+    if (newPassword !== checkNewPass) alert("Passwords must match!");
+    console.log("Create User button has been pushed");
+    fetch("http://localhost:8080/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         newUsername: newUsername,
         email: email,
         gitHub: gitHub,
         newPassword: newPassword,
-        checkNewPass: checkNewPass 
-      })
-    })
+        checkNewPass: checkNewPass,
+      }),
+    });
   }
 
   return (
@@ -49,7 +50,6 @@ function Login() {
       <div className="Login">
         <form className="LoginForm" onSubmit={(e) => userLogin()}>
           <h4>Login</h4>
-<<<<<<< HEAD
           <div className="input-group">
             <label>Username: </label>
             <input
@@ -71,32 +71,12 @@ function Login() {
             />
           </div>
           <button type="submit" className="loginButton">
-=======
-          <label>Username: </label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br />
-          <label>Password: </label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button type="submit" id="loginButton" >
->>>>>>> 91e4db813a369b5e75d5cc9419000b9ccba23ab8
             Login
           </button>
-          <div className='OAuth'>
+          <div className="OAuth">
             <a href="https://github.com/login/oauth/authorize?client_id=c9608cb1875cd40998af&scope=read:user&redirect_uri=http://localhost:8080/github/callback">
-              Sign in with GitHub</a>
+              Sign in with GitHub
+            </a>
           </div>
         </form>
       </div>
@@ -153,7 +133,7 @@ function Login() {
               onChange={(e) => setCheckNewPass(e.target.value)}
             />
           </div>
-          <button type="submit" id="registerButton">
+          <button type="submit" className="loginButton">
             Sign Up
           </button>
         </form>
