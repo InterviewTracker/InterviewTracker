@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Feed from '../Pages/Feed/Feed.jsx';
-import Profile from '../Pages/Profile.jsx'
+import Profile from '../Pages/Profile.jsx';
+import Search from '../Pages/Feed/Search.jsx';
 
 function Navbar() {
   return (
@@ -11,6 +12,9 @@ function Navbar() {
       </Link>
       <Link to='/profile'>
         <li>Profile</li>
+      </Link>
+      <Link to='/search'>
+        <li>Search</li>
       </Link>
     </nav>
   );
