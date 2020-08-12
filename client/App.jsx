@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Login from './Pages/Login.jsx';
 import Profile from './Pages/Profile.jsx';
 import Feed from './Pages/Feed.jsx';
+import Navbar from './Components/Navbar.jsx'
 
 class App extends React.Component {
   constructor(){
@@ -27,8 +28,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello world</h1>
-        <button onClick={this.helper}>hello</button>
+        <h1>Interview Tracker</h1>
+        {/* <button onClick={this.helper}>hello</button> */}
+        {/* <Navbar /> */}
         <Profile />
       </div>
     );
