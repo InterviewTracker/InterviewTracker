@@ -2,12 +2,13 @@ import React, { Component, useState, useEffect } from 'react';
 
 function Interview(props) {
   const [didSearch, setDidSearch] = useState(false)
-  useEffect(() => {
-    if (props.searchedInterviews) {
-      setDidSearch(true)
-    }
-  })
-  if (didSearch) {
+  console.log('search result prop', props.searchedInterviews)
+  // useEffect(() => {
+  //   if (props.searchedInterviews) {
+  //     setDidSearch(true)
+  //   }
+  // })
+  if (props.searchedInterviews) {
     return (
       <div>
         <ul>
