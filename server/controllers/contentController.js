@@ -7,9 +7,9 @@ contentController.filterContent = (req, res, next) => {
 	console.log('inside filterContent', stack);
 	let queryString;
 	if (company && stack) {
-		queryString = `SELECT * FROM interview_content WHERE company_name = '${company}' AND ${stack} = 'true'`;
+		queryString = `SELECT * FROM interview_content WHERE company_name = '${company}' AND teck_stack = '${stack}'`;
 	} else if (stack) {
-		queryString = `SELECT * FROM interview_content WHERE ${stack} = 'true'`;
+		queryString = `SELECT * FROM interview_content WHERE tech_stack = '${stack}'`;
 	} else if (company) {
 		queryString = `SELECT * FROM interview_content WHERE company_name = '${company}'`;
 	}
@@ -17,9 +17,9 @@ contentController.filterContent = (req, res, next) => {
 	db
 		.query(queryString)
 		.then((data) => {
-			for (let row of data.rows) {
-				JSON.parse(row.form);
-			}
+			// for (let row of data.rows) {
+			// 	JSON.parse(row.form);
+			// }
 			res.body = data.rows;
 			console.log('this is data.rows', data.rows);
 			next();
@@ -31,15 +31,13 @@ contentController.filterContent = (req, res, next) => {
 };
 
 contentController.addContent = (req, res, next) => {
-	const userId = req.cookie;
-	const { company, status, tech_stack, form, front_end, back_end, full_stack } = req.body;
+	console.log(req.body)
+	const userId = 1;
+	const { company, status, stack, questions, title } = req.body;
 
-	const queryString = `INSERT INTO interview_content VALUES ('${userId}', '${company}', '${status}', '${tech_stack}', '${JSON.stringify(
-		form
-	)}', '${front_end}', '${back_end}', '${full_stack}')`;
+	const queryString = `INSERT INTO interview_content VALUES ('${userId}', '${company}', '${title}', '${stack}', '${status}', '${JSON.stringify(questions)}')`;
 
-	db
-		.query(queryString)
+	db.query(queryString)
 		.then((data) => {
 			console.log(data);
 			res.body = data;
