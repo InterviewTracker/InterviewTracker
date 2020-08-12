@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Interview from './Interview.jsx';
-import Search from './Search.jsx';
+import React, { useState, useEffect } from "react";
+import Interview from "./Interview.jsx";
+import Search from "./Search.jsx";
+import "../../styles/styles.scss";
 
 function Feed() {
   const [interviewsFromDb, setInterviews] = useState([]);
   useEffect(() => {
-    fetch('/user/userFeed').then(data => data.json()).then(res => {
-      console.log('res', res)
-      setInterviews([...interviewsFromDb, ...res]);
-    })
+    fetch("/user/userFeed")
+      .then((data) => data.json())
+      .then((res) => {
+        console.log("res", res);
+        setInterviews([...interviewsFromDb, ...res]);
+      });
   }, []);
   // const data = [
   //   { id: 1, company: 'google' },
@@ -18,16 +21,12 @@ function Feed() {
   const interviews = [];
   if (interviewsFromDb !== []) {
     let i = 0;
-    console.log('interviews from db', interviewsFromDb)
+    console.log("interviews from db", interviewsFromDb);
     while (i < interviewsFromDb.length) {
       interviews.push(<Interview key={i} interviews={interviewsFromDb[i]} />);
       i++;
     }
   }
-  return (
-    <div>
-      {interviews}
-    </div>
-  )
+  return <div>{interviews}</div>;
 }
 export default Feed;

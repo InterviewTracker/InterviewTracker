@@ -1,18 +1,77 @@
-@import 'variables.scss';
+@import "variables.scss";
+* {
+  font-family: sans-serif;
+}
 
-html{
-  .MainDiv {
-  display:flex;
+.MainDiv {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: sans-serif;
   font-weight: 300;
-  .Login {
-    border: solid black 2px;
-    }
+  .Login,
   .Register {
-    border: solid black 2px;
+    border: solid rgb(122, 122, 122) 2px;
+    padding: 1em;
+    width: 20%;
+    -webkit-box-shadow: 5px -2px 5px 0px rgba(0, 0, 0, 0.56);
+    box-shadow: 5px -2px 5px 0px rgba(44, 44, 44, 0.56);
+    margin: 1em;
+  }
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 2em;
+}
+.loginButton {
+  margin: 1em 0;
+  float: right;
+  padding: 5px;
+  background-color: rgb(107, 150, 214);
+  border: rgb(107, 150, 214);
+  border-radius: 5px;
+  color: white;
+}
+.OAuth {
+  margin-top: 4em;
+  display: flex;
+  justify-content: center;
+  border: solid rgb(224, 224, 224) 2px;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgb(228, 228, 228);
+}
+
+nav {
+  background-color: rgb(107, 150, 214);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2em;
+  li {
+    display: inline-block;
+    color: white;
+  }
+}
+
+.companies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .company-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 3em;
+    width: 50%;
+    border: solid 1px rgb(122, 122, 122);
+    li {
+      display: inline-block;
+      .questions {
+        display: flex;
+        flex-direction: column;
+        font-style: italic;
+      }
     }
   }
 }
