@@ -13,11 +13,43 @@ function Login() {
   const [checkNewPass, setCheckNewPass] = useState("");
   const [loggedIn, setLoggedIn] = useState("false");
   console.log("PASSWORD: ", password);
+
+  function userLogin() {
+    console.log('Login button has been pushed')
+    fetch('http://localhost:8080/user/checkLogin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    })
+  }
+
+  function newUser(e) {
+    e.preventDefault()
+    if (newPassword.length < 6) alert("Passwords must be at least 6 characters")
+    if (newPassword !== checkNewPass) alert("Passwords must match!")
+    console.log('Create User button has been pushed')
+    fetch ('http://localhost:8080/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        newUsername: newUsername,
+        email: email,
+        gitHub: gitHub,
+        newPassword: newPassword,
+        checkNewPass: checkNewPass 
+      })
+    })
+  }
+
   return (
     <div className="MainDiv">
       <div className="Login">
-        <form className="LoginForm">
+        <form className="LoginForm" onSubmit={(e) => userLogin()}>
           <h4>Login</h4>
+<<<<<<< HEAD
           <div className="input-group">
             <label>Username: </label>
             <input
@@ -39,6 +71,27 @@ function Login() {
             />
           </div>
           <button type="submit" className="loginButton">
+=======
+          <label>Username: </label>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <br />
+          <label>Password: </label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <button type="submit" id="loginButton" >
+>>>>>>> 91e4db813a369b5e75d5cc9419000b9ccba23ab8
             Login
           </button>
           <div className='OAuth'>
@@ -48,7 +101,7 @@ function Login() {
         </form>
       </div>
       <div className="Register">
-        <form className="RegisterForm">
+        <form className="RegisterForm" onSubmit={(e) => newUser()}>
           <h4>Register</h4>
           <div className="input-group">
             <label>Username: </label>
