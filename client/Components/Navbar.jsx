@@ -1,16 +1,18 @@
-import React from 'react';
-import '../styles/styles.scss'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Feed from '../Pages/Feed/Feed.jsx';
+import Profile from '../Pages/Profile.jsx'
 
-class Navbar extends React.Component {
-    render() {
-    return(
-     <div>
-      <h1> Navbar </h1>
-      <button>Feed</button> 
-      <button>Profile</button>
-      </div>
-    );
-  }
+function Navbar() {
+  return (
+    <nav>
+      <Link to='/feed'>
+        <li>Feed</li>
+      </Link>
+      <Link to='/profile'>
+        <li>Profile</li>
+      </Link>
+    </nav>
+  );
 }
-
 export default Navbar;
