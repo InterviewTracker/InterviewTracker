@@ -13,6 +13,19 @@ function Login() {
   const [checkNewPass, setCheckNewPass] = useState("");
   const [loggedIn, setLoggedIn] = useState("false");
   console.log("PASSWORD: ", password);
+
+  userLogin(() => {
+    console.log('Login button has been pushed')
+    fetch('http://localhost:8080/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    })
+  })
+
   return (
     <div className="MainDiv">
       <div className="Login">
