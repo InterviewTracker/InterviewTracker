@@ -4,7 +4,7 @@ const contentController = {};
 
 contentController.filterContent = (req, res, next) => {
   const { company, stack } = req.body;
-  console.log('inside filterContent', stack);
+  // console.log('inside filterContent', stack);
   let queryString;
   if (company && stack) {
     queryString = `SELECT * FROM interview_content WHERE company_name = '${company}' AND teck_stack = '${stack}'`;
@@ -13,7 +13,7 @@ contentController.filterContent = (req, res, next) => {
   } else if (company) {
     queryString = `SELECT * FROM interview_content WHERE company_name = '${company}'`;
   }
-  console.log(queryString);
+  // console.log(queryString);
   db
     .query(queryString)
     .then((data) => {
@@ -31,7 +31,7 @@ contentController.filterContent = (req, res, next) => {
 };
 
 contentController.addContent = (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   const userId = 1;
   const { company, status, stack, questions, title } = req.body;
 
@@ -39,7 +39,7 @@ contentController.addContent = (req, res, next) => {
 
   db.query(queryString)
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       res.body = data;
       next();
     })
@@ -50,7 +50,7 @@ contentController.addContent = (req, res, next) => {
 };
 
 contentController.editContent = (req, res, next) => {
-  console.log('editContent', req.body);
+  // console.log('editContent', req.body);
   const userId = 2;
   const { postId, topic, updatedContent } = req.body;
 
@@ -59,7 +59,7 @@ contentController.editContent = (req, res, next) => {
   db
     .query(queryString)
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       next();
     })
     .catch((err) => {

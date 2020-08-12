@@ -6,9 +6,9 @@ function Feed() {
   const [interviewsFromDb, setInterviews] = useState([]);
   useEffect(() => {
     fetch('/user/userFeed').then(data => data.json()).then(res => {
-      console.log('res', res)
+      // console.log('res', res)
       for (let interview of res.data) {
-        console.log(interview)
+        // console.log(interview)
         setInterviews([...interviewsFromDb, interview]);
       };
     })
