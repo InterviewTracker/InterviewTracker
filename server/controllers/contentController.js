@@ -14,13 +14,14 @@ contentController.filterContent = (req, res, next) => {
     queryString = `SELECT * FROM interview_content WHERE company_name = '${company}'`;
   }
   console.log(queryString);
-  db.query(queryString)
+  db
+    .query(queryString)
     .then((data) => {
-      // for (let row of data.rows) {
-      //   JSON.parse(row.form);
-      // }
+      for (let row of data.rows) {
+        JSON.parse(row.form);
+      }
       res.body = data.rows;
-
+      console.log('this is data.rows', data.rows);
       next();
     })
     .catch((err) => {
@@ -31,21 +32,14 @@ contentController.filterContent = (req, res, next) => {
 
 contentController.addContent = (req, res, next) => {
   const userId = req.cookie;
-  const {
-    company,
-    status,
-    tech_stack,
-    form,
-    front_end,
-    back_end,
-    full_stack,
-  } = req.body;
+  const { company, status, tech_stack, form, front_end, back_end, full_stack } = req.body;
 
   const queryString = `INSERT INTO interview_content VALUES ('${userId}', '${company}', '${status}', '${tech_stack}', '${JSON.stringify(
     form
   )}', '${front_end}', '${back_end}', '${full_stack}')`;
 
-  db.query(queryString)
+  db
+    .query(queryString)
     .then((data) => {
       console.log(data);
       res.body = data;
@@ -64,7 +58,8 @@ contentController.editContent = (req, res, next) => {
 
   const queryString = `UPDATE interview_content SET ${topic}='${updatedContent}' WHERE user_id=${userId} AND id=${postId}`;
 
-  db.query(queryString)
+  db
+    .query(queryString)
     .then((data) => {
       console.log(data);
       next();
@@ -82,7 +77,8 @@ contentController.deleteContent = (req, res, next) => {
 
   const queryString = `DELETE FROM interview_content WHERE id=${postId} AND user_id=${userId}`;
 
-  db.query(queryString)
+  db
+    .query(queryString)
     .then((data) => {
       console.log(data);
       next();
