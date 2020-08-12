@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Interview from './Interview.jsx'
 
 function Search() {
   const [searchResults, addSearchResults] = useState([])
@@ -18,27 +19,41 @@ function Search() {
         company: companyRef.current.value,
         stack: techRef.current.value,
       }),
-    }).then((data) => data.json()).then(res => addSearchResults([...searchResults, ...res.data]))
+    }).then((data) => data.json()).then(res => {
+      console.log('res', res)
+      addSearchResults([...searchResults, ...res])
+    })
   }
   const searchedInterviews = [];
-  let i = 0;
-  while (i < searchResults.length) {
-    interviews.push(<Interview searchedInterviews={searchResults[i]} />);
-    i++;
+  if (searchResults !== []) {
+    let i = 0;
+    while (i < searchResults.length) {
+      console.log('searchresults i', searchResults[i])
+      searchedInterviews.push(<Interview searchedInterviews={searchResults[i]} />);
+      i++;
+    }
   }
-  return (
-    <div>
+  if (searchedInterviews === []) {
+    return (
       <form >
-        company
-      <input ref={companyRef} />
-      tech
-      <input ref={techRef} />
-        <button onClick={handleSearch} type='submit'>submit</button>
+        <p>company<input ref={companyRef} /></p>
+        <p>tech<input ref={techRef} /></p>
+        <button onClick={handleSearch} type='submit'>search</button>
       </form >
+    )
+  } else {
+    return (
       <div>
-        {searchedInterviews}
+        <form >
+          <p>company<input ref={companyRef} /></p>
+          <p>tech<input ref={techRef} /></p>
+          <button onClick={handleSearch} type='submit'>search</button>
+        </form >
+        <div>
+          {searchedInterviews}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 };
 export default Search;
