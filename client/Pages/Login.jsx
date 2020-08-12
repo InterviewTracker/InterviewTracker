@@ -13,10 +13,41 @@ function Login() {
   const [checkNewPass, setCheckNewPass] = useState("");
   const [loggedIn, setLoggedIn] = useState("false");
   console.log("PASSWORD: ", password);
+
+  function userLogin() {
+    console.log('Login button has been pushed')
+    fetch('http://localhost:8080/user/checkLogin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    })
+  }
+
+  function newUser(e) {
+    e.preventDefault()
+    if (newPassword.length < 6) alert("Passwords must be at least 6 characters")
+    if (newPassword !== checkNewPass) alert("Passwords must match!")
+    console.log('Create User button has been pushed')
+    fetch ('http://localhost:8080/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        newUsername: newUsername,
+        email: email,
+        gitHub: gitHub,
+        newPassword: newPassword,
+        checkNewPass: checkNewPass 
+      })
+    })
+  }
+
   return (
     <div className="MainDiv">
       <div className="Login">
-        <form className="LoginForm">
+        <form className="LoginForm" onSubmit={(e) => userLogin()}>
           <h4>Login</h4>
           <label>Username: </label>
           <input
@@ -36,7 +67,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <button type="submit" id="loginButton">
+          <button type="submit" id="loginButton" >
             Login
           </button>
         </form>
@@ -47,7 +78,7 @@ function Login() {
         </a>
       </div>
       <div className="Register">
-        <form className="RegisterForm">
+        <form className="RegisterForm" onSubmit={(e) => newUser()}>
           <h4>Register</h4>
           <label>Username: </label>
           <input

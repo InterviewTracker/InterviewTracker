@@ -24,7 +24,7 @@ class App extends React.Component {
       },
       body: JSON.stringify({ company: 'spaceX', full_stack: 'true' }),
     }).then((data) => {
-      console.log(data);
+    //   console.log(data);
     });
   }
 
