@@ -34,7 +34,7 @@ class App extends React.Component {
           {/* component = privateRoute in PrivatRoute.jsx isLoggedIn will be in props */}
           <Route path='/navbar' component={Navbar} />
           <Route path='/profile' component={Profile} />
-          {/* <Route path='/' component={Feed} /> */}
+          <Route path='/' component={Feed} />
         </Switch>
         <button onClick={this.helper}>hello</button>
       </div>
