@@ -4,36 +4,41 @@ import Search from './Search.jsx';
 
 function Feed() {
   const [interviewsFromDb, setInterviews] = useState([]);
-  // useEffect(() => {
-  //   fetch('localhost:3000/feed')
-  //     .then((data) => {
-  //       data.json();
-  //     })
-  //     .then((res) => {
-  //       for (let interview of res) {
-  //         setInterviews(interviews.push(<Interview interviews={interviews} />));
-  //       }
-  //     });
-  // });
-  const data = [
-    { id: 1, company: 'google' },
-    { id: 2, company: 'amazon' },
-    { id: 3, company: 'kmart' },
-  ];
   useEffect(() => {
-    setInterviews([...interviewsFromDb, ...data]);
+    fetch('/user/userFeed').then(data => data.json()).then(res => {
+      console.log('res', res)
+      for (let interview of res.data) {
+        console.log(interview)
+        setInterviews([...interviewsFromDb, interview]);
+      };
+    })
   }, []);
+  // const data = [
+  //   { id: 1, company: 'google' },
+  //   { id: 2, company: 'amazon' },
+  //   { id: 3, company: 'kmart' },
+  // ];
   const interviews = [];
-  let i = 0;
-  while (i < interviewsFromDb.length) {
-    interviews.push(<Interview interviews={interviewsFromDb[i]} />);
-    i++;
+  if (interviewsFromDb !== []) {
+    let i = 0;
+    while (i < interviewsFromDb.length) {
+      interviews.push(<Interview interviews={interviewsFromDb[i]} />);
+      i++;
+    }
   }
-  return (
-    <div>
-      <Search />
-      {interviews}
-    </div>
-  );
+  if (interviews !== []) {
+    return (
+      <div>
+        <Search />
+        {interviews}
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <Search />
+      </div>
+    );
+  }
 }
 export default Feed;
