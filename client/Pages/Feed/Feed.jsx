@@ -7,10 +7,7 @@ function Feed() {
   useEffect(() => {
     fetch('/user/userFeed').then(data => data.json()).then(res => {
       console.log('res', res)
-      for (let interview of res.data) {
-        console.log(interview)
-        setInterviews([...interviewsFromDb, interview]);
-      };
+      setInterviews([...interviewsFromDb, ...res]);
     })
   }, []);
   // const data = [
@@ -21,24 +18,16 @@ function Feed() {
   const interviews = [];
   if (interviewsFromDb !== []) {
     let i = 0;
+    console.log('interviews from db', interviewsFromDb)
     while (i < interviewsFromDb.length) {
-      interviews.push(<Interview interviews={interviewsFromDb[i]} />);
+      interviews.push(<Interview key={i} interviews={interviewsFromDb[i]} />);
       i++;
     }
   }
-  if (interviews !== []) {
-    return (
-      <div>
-        <Search />
-        {interviews}
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <Search />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {interviews}
+    </div>
+  )
 }
 export default Feed;

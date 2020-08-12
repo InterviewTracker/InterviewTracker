@@ -6,6 +6,7 @@ import InterviewForm from './Components/InterviewForm.jsx';
 import Feed from './Pages/Feed/Feed.jsx';
 import Navbar from './Components/Navbar.jsx';
 import Home from './Pages/Home.jsx';
+import Search from './Pages/Feed/Search.jsx'
 
 import { Route, Switch, withRouter, Link } from 'react-router-dom';
 
@@ -36,10 +37,9 @@ class App extends React.Component {
           {/* component = privateRoute in PrivatRoute.jsx isLoggedIn will be in props */}
           {/* <Route path='/navbar' component={Navbar} /> */}
           <Route path='/profile' component={Profile} />
-          <Route path='/' component={Feed} />
+          <Route path='/search' component={Search} />
         </Switch>
-        <button onClick={this.helper}>hello</button>
-      </div>  
+      </div>
     );
   }
 }
