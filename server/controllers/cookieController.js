@@ -11,4 +11,15 @@ cookieController.verifyCookie = (req, res, next) => {
   next();
 };
 
+cookieController.checkGithubCookie = (req, res, next) => {
+  console.log('CHECK FOR COOKIES', req.cookies);
+  if(req.cookies.github){
+    res.locals.login = true;
+    next();
+  } else {
+    res.locals.login = false;
+    next();
+  }
+}
+
 module.exports = cookieController;
