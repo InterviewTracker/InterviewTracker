@@ -8,7 +8,11 @@ router.get('/userFeed', userController.getFeed, (req, res, next) => {
   res.json(res.locals.data);
 });
 
-router.get('/checkLogin', cookieController.checkGithubCookie, (req, res, next) => {
+router.post('/login', userController.verifyUser, (req, res, next) => {
+  res.json(res.body)
+})
+
+router.post('/checkLogin', cookieController.checkGithubCookie, (req, res, next) => {
   res.json(res.locals.login);
 })
 

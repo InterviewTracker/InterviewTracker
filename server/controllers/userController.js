@@ -5,8 +5,8 @@ const userController = {};
 
 userController.verifyUser = (req, res, next) => {
   const { userName, password } = req.body;
-
-  const queryString = `SELECT * FROM user_info WHERE user_name = ${userName} AND password = ${password}`;
+  console.log('REQ.BODY: ', req.body)
+  const queryString = `SELECT * FROM user_info WHERE user_name = '${userName}' AND password = '${password}'`;
 
   db.query(queryString)
     .then((data) => {
@@ -14,6 +14,8 @@ userController.verifyUser = (req, res, next) => {
         console.log('THERE IS NO DATA')
         res.status(404).JSON({ err: 'Incorrect username or password' });
       } else {
+        res.cookie('admin', data.rows[0].id)
+        console.log('RES.COOKIES: ', res.cookies)
         res.body = data.rows[0].id;
         next();
       }
@@ -44,14 +46,15 @@ userController.getFeed = (req, res, next) => {
 
 userController.addUser = (req, res, next) => {
     console.log('THIS IS ADD USER BODY', req.body)
-    const { name, userName, email, github, password } = req.body;  
-    const checkQuery = `SELECT * FROM user_info WHERE github = '${github}'`
+    const { newUsername, email, gitHub, newPassword } = req.body;  
+    const checkQuery = `SELECT * FROM user_info WHERE github = '${newUsername}'`
     db.query(checkQuery)
     .then((data => {
-      if (data.rows){
-          res.redirect('/');
+      if (data.rows.length){
+          res.status(400)
+          next()
       } else {
-        const queryString = `INSERT into user_info VALUES ('${name}', '${userName}', '${email}', '${password}', '${github}')`
+        const queryString = `INSERT into user_info VALUES ('${newUsername}', '${email}', '${newPassword}', '${gitHub}')`
         db.query(queryString)
         .then((data) => {
             console.log('INSIDE ADD USER:', data);

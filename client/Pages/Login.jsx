@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "../styles/styles.scss";
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -14,16 +14,19 @@ function Login() {
   const [loggedIn, setLoggedIn] = useState("false");
   console.log("PASSWORD: ", password);
 
-  function userLogin() {
+  function userLogin(e) {
+    e.preventDefault()
     console.log('Login button has been pushed')
-    fetch('http://localhost:8080/user/checkLogin', {
+    fetch('http://localhost:8080/user/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: username,
+        userName: username,
         password: password
       })
     })
+    .then(res => res.json())
+    .then(res => props.setLogin(true))
   }
 
   function newUser(e) {
@@ -31,25 +34,27 @@ function Login() {
     if (newPassword.length < 6) alert("Passwords must be at least 6 characters")
     if (newPassword !== checkNewPass) alert("Passwords must match!")
     console.log('Create User button has been pushed')
-    fetch ('http://localhost:8080/user', {
+    fetch ('http://localhost:8080/user/addUser', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         newUsername: newUsername,
         email: email,
-        gitHub: gitHub,
+        gitHub: github,
         newPassword: newPassword,
         checkNewPass: checkNewPass 
       })
     })
+    .then(res => res.json())
+    .then(res => console.log('RES RETURNED TO LOGIN: ', res))
+    .catch(res => alert('User already exists'))
   }
 
   return (
     <div className="MainDiv">
       <div className="Login">
-        <form className="LoginForm" onSubmit={(e) => userLogin()}>
+        <form className="LoginForm" onSubmit={(e) => userLogin(e)}>
           <h4>Login</h4>
-<<<<<<< HEAD
           <div className="input-group">
             <label>Username: </label>
             <input
@@ -71,37 +76,17 @@ function Login() {
             />
           </div>
           <button type="submit" className="loginButton">
-=======
-          <label>Username: </label>
-          <input
-            id="username"
-            type="text"
-            name="username"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br />
-          <label>Password: </label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button type="submit" id="loginButton" >
->>>>>>> 91e4db813a369b5e75d5cc9419000b9ccba23ab8
             Login
           </button>
-          <div className='OAuth'>
+          <div className="OAuth">
             <a href="https://github.com/login/oauth/authorize?client_id=c9608cb1875cd40998af&scope=read:user&redirect_uri=http://localhost:8080/github/callback">
-              Sign in with GitHub</a>
+              Sign in with GitHub
+            </a>
           </div>
         </form>
       </div>
       <div className="Register">
-        <form className="RegisterForm" onSubmit={(e) => newUser()}>
+        <form className="RegisterForm" onSubmit={(e) => newUser(e)}>
           <h4>Register</h4>
           <div className="input-group">
             <label>Username: </label>
@@ -153,7 +138,7 @@ function Login() {
               onChange={(e) => setCheckNewPass(e.target.value)}
             />
           </div>
-          <button type="submit" id="registerButton">
+          <button type="submit" className="loginButton">
             Sign Up
           </button>
         </form>
