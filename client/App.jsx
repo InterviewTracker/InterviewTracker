@@ -34,7 +34,7 @@ class App extends React.Component {
         <Switch>
           <Route path='/feed' component={Feed} />
           {/* component = privateRoute in PrivatRoute.jsx isLoggedIn will be in props */}
-          <Route path='/navbar' component={Navbar} />
+          {/* <Route path='/navbar' component={Navbar} /> */}
           <Route path='/profile' component={Profile} />
           <Route path='/' component={Feed} />
         </Switch>
