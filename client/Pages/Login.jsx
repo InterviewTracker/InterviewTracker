@@ -42,7 +42,7 @@ function Login() {
         </form>
       </div>
       <div className="OAuth">
-        <a href="https://github.com/login/oauth/authorize?client_id=c9608cb1875cd40998af&scope=read:user&redirect_uri=http://localhost:8080/user/userFeed">
+        <a href="https://github.com/login/oauth/authorize?client_id=c9608cb1875cd40998af&scope=read:user&redirect_uri=http://localhost:8080/github/callback">
           Sign in with GitHub
         </a>
       </div>

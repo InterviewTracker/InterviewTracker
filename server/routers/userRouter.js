@@ -3,11 +3,12 @@ const userController = require("../controllers/userController.js");
 const request = require("superagent");
 const router = express.Router();
 
-// router.get('/userFeed', userController.getFeed, (req, res, next) => {
-//     console.log(res.body);
-// });
+router.get('/userFeed', userController.getFeed, (req, res, next) => {
+    console.log('THIS IS USER FEED***********');
+});
 
-router.get("/userFeed", (req, res, next) => {
+// getting the access token
+/* router.get("/userFeed", (req, res, next) => {
   const { query } = req;
   console.log("query: ", query);
   const { code } = query;
@@ -33,8 +34,7 @@ router.get("/userFeed", (req, res, next) => {
       console.log("DATA: ", data);
       res.redirect("/");
     //   res.send(data);
-    });
-  console.log("code: ", code);
+    })
 });
 //somehow I want to combine this get request with the one above.
 //I think I need to make a get request setting the accessToken as a header
@@ -51,6 +51,7 @@ router.get("/", (req, res, next) => {
       // res.send(result.body)
     });
 });
+*/
 
 router.post("/addUser", userController.addUser, (req, res, next) => {
   res.json(res.body);
