@@ -48,8 +48,8 @@ router.get("/", (req, res, next) => {
       console.log("result.body: ", result.body);
       console.log('result: ', result)
 
-      // res.send(result.body)
-    });
+router.get('/profile', cookieController.verifyCookie, userController.getUser, (req, res, next) => {
+  res.status(200).json(res.body)
 });
 */
 

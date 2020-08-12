@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/server.js",
     "dev": " concurrently \"nodemon server/server.js\" \"webpack-dev-server\"",
     "build": "webpack"
   },

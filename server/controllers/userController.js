@@ -3,20 +3,42 @@ const axios = require('axios');
 
 const userController = {};
 
-userController.getFeed = (req, res, next) => {
-    const cookie = 1;
-    const queryString = `SELECT * FROM interview_content WHERE user_id != ${cookie}`
-    db.query(queryString, cookie)
+userController.verifyUser = (req, res, next) => {
+  const { userName, password } = req.body;
+
+  const queryString = `SELECT * FROM user_info WHERE user_name = ${userName} AND password = ${password}`;
+
+  db.query(queryString)
     .then((data) => {
-        // JSON.parse(data.form);
-        for(let row of data.rows){
-            JSON.parse(row.form);
-        };
-        res.body = data.rows;
+      if (!data.rows.length) {
+        console.log('THERE IS NO DATA')
+        res.status(404).JSON({ err: 'Incorrect username or password' });
+      } else {
+        res.body = data.rows[0].id;
         next();
+      }
     })
     .catch((err) => {
-        next(err); 
+      console.log(err);
+      next(err);
+    })
+}
+
+userController.getFeed = (req, res, next) => {
+  //   console.log('user/userFeed/')
+  const cookie = 4;
+  const queryString = `SELECT * FROM interview_content WHERE user_id != ${cookie}`;
+  db.query(queryString, cookie)
+    .then((data) => {
+      // for(let row of data.rows){
+      //     JSON.parse(row.form);
+      // };
+      console.log(data.rows)
+      res.locals.data = data.rows;
+      next();
+    })
+    .catch((err) => {
+      next(err);
     })
 };
 
@@ -45,15 +67,15 @@ userController.addUser = (req, res, next) => {
 };
 
 userController.getUser = (req, res, next) => {
-    const cookie = req.cookie;
-    const queryString = `SELECT * FROM user_info WHERE id = $1`;
-    db.query(queryString, [cookie])
+  const cookie = req.cookie;
+  const queryString = `SELECT * FROM user_info WHERE id = ${cookie}`;
+  db.query(queryString)
     .then((data) => {
-        res.body = data.rows;
-        next();
+      res.body = data.rows;
+      next();
     })
     .catch((err) => {
-        next(err); 
+      next(err);
     });
 };
 
