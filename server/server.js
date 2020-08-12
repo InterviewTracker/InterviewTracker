@@ -7,6 +7,8 @@ const bodyParser = require('body-parser')
 const app = express();
 const PORT = process.env.PORT || 3000;
 const userController = require('./controllers/userController');
+const cookieController = require('./controllers/cookieController');
+
 
 
 app.use(cookiesParser());

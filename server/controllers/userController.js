@@ -49,13 +49,14 @@ userController.addUser = (req, res, next) => {
     db.query(checkQuery)
     .then((data => {
       if (data.rows){
-          res.redirect('/user/userFeed');
+          res.redirect('/');
       } else {
         const queryString = `INSERT into user_info VALUES ('${name}', '${userName}', '${email}', '${password}', '${github}')`
         db.query(queryString)
         .then((data) => {
+            console.log('INSIDE ADD USER:', data);
             res.body = data.rows
-            
+             
             // res.redirect('/user/getFeed');
             next();
         })
@@ -131,8 +132,8 @@ userController.getToken = (req, res, next) => {
                 'Accept': 'application/json'
             }
         })
-        .then (() => {
-            console.log('REDIRECTING TO USERFEED');
+        .then ((data) => {
+            res.cookie('github', true);
             return res.redirect('/user/userFeed');
           })
         .catch((err) => {
