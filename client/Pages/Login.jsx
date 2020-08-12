@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "../styles/styles.scss";
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -17,16 +17,16 @@ function Login() {
   function userLogin(e) {
     e.preventDefault()
     console.log('Login button has been pushed')
-    fetch('http://localhost:8080/user/checkLogin', {
+    fetch('http://localhost:8080/user/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: username,
+        userName: username,
         password: password
       })
     })
     .then(res => res.json())
-    .then(res => console.log('RES RETURNED TO LOGIN: ', res))
+    .then(res => props.setLogin(true))
   }
 
   function newUser(e) {
@@ -47,6 +47,7 @@ function Login() {
     })
     .then(res => res.json())
     .then(res => console.log('RES RETURNED TO LOGIN: ', res))
+    .catch(res => alert('User already exists'))
   }
 
   return (
