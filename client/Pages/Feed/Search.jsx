@@ -58,15 +58,15 @@ function Search() {
       <div>
         <form>
           <p>
-            company
+            Company:
             <input ref={companyRef} />
           </p>
           <p>
-            tech
+            Tech:
             <input ref={techRef} />
           </p>
           <button onClick={handleSearch} type="submit">
-            search
+            Search
           </button>
         </form>
         <div>{searchedInterviews}</div>

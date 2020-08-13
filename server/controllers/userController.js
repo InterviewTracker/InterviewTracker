@@ -15,7 +15,7 @@ userController.verifyUser = (req, res, next) => {
         res.status(404).JSON({ err: 'Incorrect username or password' });
       } else {
         res.cookie('admin', data.rows[0].id)
-        console.log('RES.COOKIES: ', res.cookies)
+        console.log('RES.COOKIES: ', req.cookies)
         res.body = data.rows[0].id;
         next();
       }
@@ -51,6 +51,8 @@ userController.addUser = (req, res, next) => {
     db.query(checkQuery)
     .then((data => {
       if (data.rows.length){
+        console.log('dfasdfasdsdaf',data.rows[0].id)
+        res.cookie('id',data.rows[0].id)
           res.status(400)
           res.redirect('/login')
           next()
@@ -58,6 +60,10 @@ userController.addUser = (req, res, next) => {
         const queryString = `INSERT into user_info VALUES ('${newUsername}', '${email}', '${newPassword}', '${gitHub}')`
         db.query(queryString)
         .then((data) => {
+          db.query(checkQuery)
+          .then(data=>{
+            res.cookie('id',data.rows[0].id)
+          })
             console.log('INSIDE ADD USER:', data);
             res.body = data.rows
              
@@ -72,8 +78,8 @@ userController.addUser = (req, res, next) => {
 };
 
 userController.getUser = (req, res, next) => {
-  const cookie = req.cookie;
-  const queryString = `SELECT * FROM user_info WHERE id = ${cookie}`;
+  const cookie = req.cookies.gitHub;
+  const queryString = `SELECT * FROM user_info WHERE github_name = ${cookie}`;
   db.query(queryString)
     .then((data) => {
       res.body = data.rows;
@@ -127,10 +133,10 @@ userController.getToken = (req, res, next) => {
   userController.addGithubUser = (req, res, next) => {
     axios.post('http://localhost:8080/user/addUser', {
         name: res.locals.githubdata.name, 
-        userName: res.locals.githubdata.login, 
+        userUsername: res.locals.githubdata.login, 
         email: res.locals.githubdata.email, 
         github: res.locals.githubdata.login, 
-        password: null, 
+        newPassword: null, 
       }, {
             // headers: {
             //     'Accept': 'application/json'
@@ -138,6 +144,7 @@ userController.getToken = (req, res, next) => {
         })
         .then ((data) => {
             res.cookie('github', true);
+            res.cookie('gitHub', res.locals.githubdata.login)
             return res.redirect('/');
           })
         .catch((err) => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Interview from "../Pages/Feed/Interview.jsx";
 import "../styles/styles.scss";
+import Cookies from 'js-cookie';
 
 function MyFeed() {
   const [interviewsFromDb, setInterviews] = useState([]);
@@ -22,7 +23,10 @@ function MyFeed() {
     let i = 0;
     console.log("interviews from db", interviewsFromDb);
     while (i < interviewsFromDb.length) {
-      interviews.push(<Interview key={i} interviews={interviewsFromDb[i]} />);
+      if(interviewsFromDb[i].github_name === Cookies.get('gitHub')){
+        interviews.push(<Interview key={i} answers={true} interviews={interviewsFromDb[i]} />);
+        
+      }
       i++;
     }
   }
