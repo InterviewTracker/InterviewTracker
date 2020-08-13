@@ -8,7 +8,7 @@ function Home() {
   const [isLoggedIn, setLogin] = useState(false);
 
   useEffect(() => {
-    if(Cookies.get('admin')) setLogin(true)
+    if(Cookies.get('admin') || Cookies.get('github')) setLogin(true)
     console.log('in useEffect in Home')
     fetch('/user/checkLogin').then(data => data.json()).then(data => {
       console.log('DATA IN HOME: ', data)
