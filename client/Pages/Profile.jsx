@@ -9,15 +9,16 @@ import MyFeed from '../Components/MyFeed.jsx';
 function Profile () {
   let { path, url } = useRouteMatch();
   return ( 
-    <div>
-      <h2>My Profile</h2>
-      <Link to={`${url}/interviews`}>
+    <div >
+      <div className='myProfile'>
+        <Link to={`${url}/interviews`}>
         <li>My Interviews</li>
       </Link>
       <Link to={`${url}/form`}>
         <li>Interview Form</li>
       </Link>
-
+      </div>
+      
        <Switch>
         <Route exact path={path}>
         </Route>

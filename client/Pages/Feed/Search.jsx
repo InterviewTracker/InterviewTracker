@@ -40,36 +40,39 @@ function Search() {
   if (searchedInterviews === []) {
     return (
       <form>
-        <p>
-          Company:
+        <p> <strong>Company: </strong>
+          
           <input ref={companyRef} />
         </p>
-        <p>
-          Tech:
+        <p> <strong>Tech: </strong>
+          
           <input ref={techRef} />
         </p>
         <button onClick={handleSearch} type="submit">
           Search
         </button>
+        <br/>
       </form>
     );
   } else {
     return (
       <div>
-        <form>
-          <p>
-            Company:
+        <form className="searchBox">
+          <p> <strong>Company: </strong>
+            
             <input ref={companyRef} />
           </p>
-          <p>
-            Tech:
+          <p> <strong>Tech Stack: </strong>
+            
             <input ref={techRef} />
           </p>
           <button onClick={handleSearch} type="submit">
             Search
           </button>
+          <br/>
         </form>
         <div>{searchedInterviews}</div>
+        <br/>
       </div>
     );
   }
