@@ -18,7 +18,7 @@ function Feed() {
     let i = 0;
     console.log("interviews from db", interviewsFromDb);
     while (i < interviewsFromDb.length) {
-      interviews.push(<Interview key={i} interviews={interviewsFromDb[i]} />);
+      interviews.push(<Interview key={i} feed={true} interviews={interviewsFromDb[i]} />);
       i++;
     }
   }

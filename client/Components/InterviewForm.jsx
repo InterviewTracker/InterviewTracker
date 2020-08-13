@@ -13,7 +13,7 @@ function InterviewForm () {
     const list = document.getElementsByClassName('question');
     const questions = [];
     for(let question of list){
-      questions.push(question.value);
+      questions.push([question.value]);
     }
     // console.log(questions);
 

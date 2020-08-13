@@ -63,15 +63,18 @@ contentController.addContent = (req, res, next) => {
 };
 
 contentController.editContent = (req, res, next) => {
-  // console.log('editContent', req.body);
-  const userId = 2;
-  const { postId, topic, updatedContent } = req.body;
+  console.log('editContent', req.body.questions);
+  let questions = req.body.questions;
+  questions = JSON.stringify(questions)
+  const id =req.body.id
+  // questions =json.stringify(questions)
+  console.log('adadfdfasdfa',questions)
 
-  const queryString = `UPDATE interview_content SET ${topic}='${updatedContent}' WHERE user_id=${userId} AND id=${postId}`;
+  const queryString = `UPDATE interview_content SET questions ='${questions}'  WHERE id=${id} `;
 
   db.query(queryString)
     .then((data) => {
-      // console.log(data);
+      res.redirect('/content/addContent')
       next();
     })
     .catch((err) => {
