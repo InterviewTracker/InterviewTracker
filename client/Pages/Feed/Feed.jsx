@@ -5,6 +5,7 @@ import "../../styles/styles.scss";
 
 function Feed() {
   const [interviewsFromDb, setInterviews] = useState([]);
+  
   useEffect(() => {
     fetch("/content/allContent")
       .then((data) => data.json())
