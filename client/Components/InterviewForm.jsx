@@ -34,11 +34,11 @@ function InterviewForm () {
     return (
       <div id="InterviewDiv">
         
-      <form className='InterviewForm' onSubmit={onSubmit}>
-
+      <form className='interviewForm' onSubmit={onSubmit}>
+<br/>
         {/* Company Name  */}
-        <label>
-          Company Name: 
+        <label> <strong>Company Name: </strong>
+          
           <input 
           type='text'
           name='company'
@@ -51,8 +51,8 @@ function InterviewForm () {
         {/* Title  */}
         <br/>
         <br/>
-        <label>
-          Position Title: 
+        <label> <strong>Position Title: </strong>
+          
           <input 
           type="text" 
           name='title'
@@ -64,8 +64,8 @@ function InterviewForm () {
         {/* Status  */}
         <br/>
         <br/>
-        <label>
-          Status:
+        <label> <strong>Status: </strong>
+          
             <input type="radio" checked={status === 'Passed'} value="Passed" onChange={() => setStatus('Passed')} />
             Passed
         </label>
@@ -81,8 +81,8 @@ function InterviewForm () {
       {/* Drop Down for Tech Stack */}
       <br/>
       <br/>
-        <label>
-          Your Tech Stack:
+        <label> <strong> Your Tech Stack: </strong>
+         
           <select onChange={(e) => setStack(e.target.value)}>
           {/* {<select> */}
             <option value=""> Select </option>
@@ -96,8 +96,8 @@ function InterviewForm () {
         {/* Question1  */}
         <br/>
         <br/>
-        <label>
-          Question 1: 
+        <label> <strong>Question 1: </strong>
+          
           <input 
           className='question'
           type="text" 
@@ -108,8 +108,8 @@ function InterviewForm () {
          {/* Question2  */}
          <br/>
         <br/>
-        <label>
-          Question 2: 
+        <label> <strong>Question 2: </strong>
+          
           <input 
           className='question'
           type="text" 
@@ -120,8 +120,8 @@ function InterviewForm () {
          {/* Question3  */}
          <br/>
         <br/>
-        <label>
-          Question 3: 
+        <label> <strong> Question 3: </strong>
+         
           <input 
           className='question'
           type="text" 
@@ -132,8 +132,8 @@ function InterviewForm () {
         {/* Check box  */}
         <br/>
         <br/>
-        <label>
-          More Questions? 
+        <label> <strong>More Questions? </strong>
+          
           <input 
           type="checkbox" 
           name='More Questions'
@@ -147,7 +147,7 @@ function InterviewForm () {
         <button type="submit" className="btn submitInterview">
               Submit
         </button>
-
+ <br/><br/>
       </form>
       </div>
   );

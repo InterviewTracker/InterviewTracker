@@ -30,7 +30,7 @@ function MyFeed() {
       i++;
     }
   }
-  return <div>{interviews}</div>;
+  return <div className="myInterviews">{interviews}</div>;
 }
 
 export default MyFeed;
