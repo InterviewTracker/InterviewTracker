@@ -52,6 +52,7 @@ userController.addUser = (req, res, next) => {
     .then((data => {
       if (data.rows.length){
           res.status(400)
+          res.redirect('/login')
           next()
       } else {
         const queryString = `INSERT into user_info VALUES ('${newUsername}', '${email}', '${newPassword}', '${gitHub}')`
@@ -131,13 +132,13 @@ userController.getToken = (req, res, next) => {
         github: res.locals.githubdata.login, 
         password: null, 
       }, {
-            headers: {
-                'Accept': 'application/json'
-            }
+            // headers: {
+            //     'Accept': 'application/json'
+            // }
         })
         .then ((data) => {
             res.cookie('github', true);
-            return res.redirect('/user/userFeed');
+            return res.redirect('/');
           })
         .catch((err) => {
             console.log('THIS IS THE ERROR FROM ADDING USER', err);
