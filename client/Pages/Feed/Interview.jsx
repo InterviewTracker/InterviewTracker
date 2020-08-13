@@ -10,33 +10,21 @@ function Interview(props) {
   //   }
   // })
 
+  console.log('props.interviews',props.interviews)
+  const questions = JSON.parse(props.interviews.questions).map((question) => (
+    <li>{question}</li>
+  ));
   if (props.searchedInterviews) {
-    const questions = JSON.parse(
-      props.searchedInterviews.questions
-    ).map((question) => <li>{question}</li>);
     return (
       <div className="companies">
-        <ul className="company-info">
+        <ul>
           <li>Company: {props.searchedInterviews.company_name}</li>
           <li>Tech stack: {props.searchedInterviews.tech_stack}</li>
-          <li>
-            <strong>Questions: </strong>
-            <ul className="questions">{questions}</ul>
-          </li>
           <li>Status: {props.searchedInterviews.status}</li>
         </ul>
       </div>
     );
   } else {
-    const questions = JSON.parse(props.interviews.questions).map((question) => (
-      <li className="question">
-        {question}
-        <input className="answer"></input>
-        <button className="answer-btn" type="submit">
-          Add Answer
-        </button>
-      </li>
-    ));
     return (
       <div className="companies">
         <ul className="company-info">

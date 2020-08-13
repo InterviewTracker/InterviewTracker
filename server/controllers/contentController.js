@@ -44,13 +44,11 @@ contentController.filterContent = (req, res, next) => {
 };
 
 contentController.addContent = (req, res, next) => {
-  // console.log(req.body)
-  const userId = 1;
+  console.log('sdfasdfasdfadfasdfadfasddf',req.cookies.gitHub)
+  const userId =1
   const { company, status, stack, questions, title } = req.body;
 
-  const queryString = `INSERT INTO interview_content VALUES ('${userId}', '${company}', '${title}', '${stack}', '${status}', '${JSON.stringify(
-    questions
-  )}')`;
+  const queryString = `INSERT INTO interview_content VALUES ('${userId}', '${company}', '${title}', '${stack}', '${status}', '${JSON.stringify(questions)}', '${req.cookies.gitHub}')`;
 
   db.query(queryString)
     .then((data) => {

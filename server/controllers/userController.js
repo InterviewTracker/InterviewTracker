@@ -51,6 +51,8 @@ userController.addUser = (req, res, next) => {
     db.query(checkQuery)
     .then((data => {
       if (data.rows.length){
+        console.log('dfasdfasdsdaf',data.rows[0].id)
+          res.cookie('id',data.rows[0].id)
           res.status(400)
           res.redirect('/login')
           next()
@@ -58,6 +60,10 @@ userController.addUser = (req, res, next) => {
         const queryString = `INSERT into user_info VALUES ('${newUsername}', '${email}', '${newPassword}', '${gitHub}')`
         db.query(queryString)
         .then((data) => {
+          db.query(checkQuery)
+           .then(data=>{
+             res.cookie('id',data.rows[0].id)
+           })
             console.log('INSIDE ADD USER:', data);
             res.body = data.rows
              
@@ -127,19 +133,21 @@ userController.getToken = (req, res, next) => {
   userController.addGithubUser = (req, res, next) => {
     axios.post('http://localhost:8080/user/addUser', {
         name: res.locals.githubdata.name, 
-        userName: res.locals.githubdata.login, 
+        newUsername: res.locals.githubdata.login, 
         email: res.locals.githubdata.email, 
-        github: res.locals.githubdata.login, 
-        password: null, 
+        gitHub: res.locals.githubdata.login, 
+        newPassword: null, 
       }, {
             // headers: {
             //     'Accept': 'application/json'
             // }
         })
         .then ((data) => {
+          const queryString = `SELECT * FROM user_info WHERE id = ${cookie}`;
             res.cookie('github', true);
+            res.cookie('gitHub', res.locals.githubdata.login)
             return res.redirect('/');
-          })
+        })
         .catch((err) => {
             console.log('THIS IS THE ERROR FROM ADDING USER', err);
         });
