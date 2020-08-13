@@ -41,11 +41,11 @@ function Search() {
     return (
       <form>
         <p>
-          Company
+          Company:
           <input ref={companyRef} />
         </p>
         <p>
-          Tech
+          Tech:
           <input ref={techRef} />
         </p>
         <button onClick={handleSearch} type="submit">
