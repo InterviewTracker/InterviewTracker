@@ -72,6 +72,18 @@ nav {
         flex-direction: column;
         font-style: italic;
       }
+      .question {
+        display: flex;
+        flex-direction: column;
+        font-style: italic;
+      }
+      .answer {
+        width: 80%;
+        height: 80px;
+      }
+      .answer-btn {
+        width: 80%;
+      }
     }
   }
 }

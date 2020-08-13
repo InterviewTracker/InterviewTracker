@@ -6,18 +6,13 @@ import "../../styles/styles.scss";
 function Feed() {
   const [interviewsFromDb, setInterviews] = useState([]);
   useEffect(() => {
-    fetch("/user/userFeed")
+    fetch("/content/allContent")
       .then((data) => data.json())
       .then((res) => {
         console.log("res", res);
         setInterviews([...interviewsFromDb, ...res]);
       });
   }, []);
-  // const data = [
-  //   { id: 1, company: 'google' },
-  //   { id: 2, company: 'amazon' },
-  //   { id: 3, company: 'kmart' },
-  // ];
   const interviews = [];
   if (interviewsFromDb !== []) {
     let i = 0;
